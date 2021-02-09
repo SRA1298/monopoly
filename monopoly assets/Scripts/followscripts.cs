@@ -80,7 +80,7 @@ public class followscripts : MonoBehaviour
     // in this function the camera is ajusted according to the player and the block on which the player is moving
     IEnumerator playercamerahavetoawait()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2.5f);
         if (DiceManager.Diceinstance.cameracontrol == true)
         {
             

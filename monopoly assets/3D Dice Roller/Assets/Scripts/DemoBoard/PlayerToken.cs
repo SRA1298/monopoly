@@ -40,11 +40,12 @@ public class PlayerToken : Photon.MonoBehaviour
 
     public int companyrent = 0;
 
-    public bool forjailmodel = false;
+    bool forjailmodel = false;
 
     //[HideInInspector]
     //public int onlyforonetime = 1;
 
+    Animator playeranim;
     void Awake()
     {
 
@@ -54,6 +55,7 @@ public class PlayerToken : Photon.MonoBehaviour
 
         valueText = GameObject.Find("ValueText").gameObject.GetComponent<Text>();
 
+        playeranim = GetComponent<Animator>();
         isplayeratjail = false;
         finalTile = startingTile;
         print("this is final value from awake" + finalTile);
@@ -78,16 +80,18 @@ public class PlayerToken : Photon.MonoBehaviour
     /// </summary>
     void Update () 
     {
-        if(menuscripts.menuinstance.gameisonline == true)
-        {
-            if (photonView.isMine)
-            {
-                photonView.RPC("movement", PhotonTargets.AllBuffered);
+       
+        //if(menuscripts.menuinstance.gameisonline == true)
+        //{
+        //    if (photonView.isMine)
+        //    {
+        //        photonView.RPC("movement", PhotonTargets.AllBuffered);
                
-            }
-        }
+        //    }
+        //}
         if(menuscripts.menuinstance.gameisonline == false)
         {
+           
             if (Vector3.Distance(this.transform.position, targetPosition) > 0.03f && isplayeratjail == false)
             {
                 if (forjail == 30)
@@ -107,12 +111,15 @@ public class PlayerToken : Photon.MonoBehaviour
 
                 if (moveQueue != null && moveQueueIndex <= moveQueue.Length && isplayeratjail == false)
                 {
+                    playeranim.SetBool("Idle", false);
+                    playeranim.SetBool("Run", true);
 
                     if (forjail != 30)
                     {
                         if (moveQueueIndex < moveQueue.Length)
                         {
                             // GetComponent<AudioSource>().Play();
+                           
                             playermovementsound.playersound.normalwalk.PlayOneShot(playermovementsound.playersound.audio1);
                             Tile nextTile = moveQueue[moveQueueIndex];
                             SetNewTargetPosition(nextTile.transform.position);
@@ -125,6 +132,7 @@ public class PlayerToken : Photon.MonoBehaviour
                         jailvisited = true;
                         if (moveQueueIndex < moveQueue.Length)
                         {
+                            
                             playermovementsound.playersound.jailwalk.PlayOneShot(playermovementsound.playersound.audio2);
                             Tile nextTile = moveQueue[moveQueueIndex];
                             SetNewTargetPosition(nextTile.transform.position);
@@ -193,114 +201,114 @@ public class PlayerToken : Photon.MonoBehaviour
 	}
 
 
-    [PunRPC]
-    private void movement()
-    {
-        if (Vector3.Distance(this.transform.position, targetPosition) > 0.03f && isplayeratjail == false)
-        {
-            if (forjail == 30)
-            {
-                this.transform.position = Vector3.SmoothDamp(this.transform.position, targetPosition, ref velocity, 0.08f);
-            }
-            else
-            {
-                this.transform.position = Vector3.SmoothDamp(this.transform.position, targetPosition, ref velocity, 0.2f);
-            }
+    //[PunRPC]
+    //private void movement()
+    //{
+    //    if (Vector3.Distance(this.transform.position, targetPosition) > 0.03f && isplayeratjail == false)
+    //    {
+    //        if (forjail == 30)
+    //        {
+    //            this.transform.position = Vector3.SmoothDamp(this.transform.position, targetPosition, ref velocity, 0.08f);
+    //        }
+    //        else
+    //        {
+    //            this.transform.position = Vector3.SmoothDamp(this.transform.position, targetPosition, ref velocity, 0.2f);
+    //        }
 
 
 
-        }
-        else
-        {
+    //    }
+    //    else
+    //    {
 
-            if (moveQueue != null && moveQueueIndex <= moveQueue.Length && isplayeratjail == false)
-            {
+    //        if (moveQueue != null && moveQueueIndex <= moveQueue.Length && isplayeratjail == false)
+    //        {
 
-                if (forjail != 30)
-                {
-                    if (moveQueueIndex < moveQueue.Length)
-                    {
-                        GetComponent<AudioSource>().Play();
-                        playermovementsound.playersound.normalwalk.PlayOneShot(playermovementsound.playersound.audio1);
-                        Tile nextTile = moveQueue[moveQueueIndex];
-                        targetPosition = new Vector3(nextTile.transform.position.x + tokenCustomLocation[DiceManager.Diceinstance.playerturn - 1].x, nextTile.transform.position.y, nextTile.transform.position.z + tokenCustomLocation[DiceManager.Diceinstance.playerturn - 1].z);
-                        velocity = Vector3.zero;
-                        //SetNewTargetPosition(nextTile.transform.position);
-                        moveQueueIndex++;
-                    }
-                }
+    //            if (forjail != 30)
+    //            {
+    //                if (moveQueueIndex < moveQueue.Length)
+    //                {
+    //                    GetComponent<AudioSource>().Play();
+    //                    playermovementsound.playersound.normalwalk.PlayOneShot(playermovementsound.playersound.audio1);
+    //                    Tile nextTile = moveQueue[moveQueueIndex];
+    //                    targetPosition = new Vector3(nextTile.transform.position.x + tokenCustomLocation[DiceManager.Diceinstance.playerturn - 1].x, nextTile.transform.position.y, nextTile.transform.position.z + tokenCustomLocation[DiceManager.Diceinstance.playerturn - 1].z);
+    //                    velocity = Vector3.zero;
+    //                    //SetNewTargetPosition(nextTile.transform.position);
+    //                    moveQueueIndex++;
+    //                }
+    //            }
 
-                if (forjail == 30)
-                {
-                    jailvisited = true;
-                    if (moveQueueIndex < moveQueue.Length)
-                    {
-                        playermovementsound.playersound.jailwalk.PlayOneShot(playermovementsound.playersound.audio2);
-                        Tile nextTile = moveQueue[moveQueueIndex];
-                        targetPosition = new Vector3(nextTile.transform.position.x + tokenCustomLocation[DiceManager.Diceinstance.playerturn - 1].x, nextTile.transform.position.y, nextTile.transform.position.z + tokenCustomLocation[DiceManager.Diceinstance.playerturn - 1].z);
-                        velocity = Vector3.zero;
-                        //SetNewTargetPosition(nextTile.transform.position);
-                        moveQueueIndex++;
+    //            if (forjail == 30)
+    //            {
+    //                jailvisited = true;
+    //                if (moveQueueIndex < moveQueue.Length)
+    //                {
+    //                    playermovementsound.playersound.jailwalk.PlayOneShot(playermovementsound.playersound.audio2);
+    //                    Tile nextTile = moveQueue[moveQueueIndex];
+    //                    targetPosition = new Vector3(nextTile.transform.position.x + tokenCustomLocation[DiceManager.Diceinstance.playerturn - 1].x, nextTile.transform.position.y, nextTile.transform.position.z + tokenCustomLocation[DiceManager.Diceinstance.playerturn - 1].z);
+    //                    velocity = Vector3.zero;
+    //                    //SetNewTargetPosition(nextTile.transform.position);
+    //                    moveQueueIndex++;
 
-                    }
-                }
-
-
-                if (moveQueueIndex == moveQueue.Length)
-                {
-                    StartCoroutine("cameraplayerstop");
-                    if (forjail == 30 && forjailmodel == true)
-                    {
-
-                        forjailmodel = false;
-                        Instantiate(DiceManager.Diceinstance.jailcage, DiceManager.Diceinstance.jailcage.transform.position, DiceManager.Diceinstance.jailcage.transform.rotation);
-                    }
-                    print(moveQueueIndex);
-                    NumberOfTile += moveQueueIndex;
+    //                }
+    //            }
 
 
-                    if (NumberOfTile > 40)
-                    {
-                        NumberOfTile = NumberOfTile - 40;
-                        forjail = forjail - 40;
-                        if (jailvisited == false)
-                        {
-                            if (DiceManager.Diceinstance.playerturn == 1)
-                            {
-                                PanelManager.instance.player1M += 200;
-                                PanelManager.instance.player1money.text = PanelManager.instance.player1M.ToString();
-                            }
-                            if (DiceManager.Diceinstance.playerturn == 2)
-                            {
-                                PanelManager.instance.player2M += 200;
-                                PanelManager.instance.player2money.text = PanelManager.instance.player2M.ToString();
-                            }
-                            if (DiceManager.Diceinstance.playerturn == 3)
-                            {
-                                PanelManager.instance.player3M += 200;
-                                PanelManager.instance.player3money.text = PanelManager.instance.player3M.ToString();
-                            }
-                            if (DiceManager.Diceinstance.playerturn == 4)
-                            {
-                                PanelManager.instance.player4M += 200;
-                                PanelManager.instance.player4money.text = PanelManager.instance.player4M.ToString();
-                            }
-                        }
+    //            if (moveQueueIndex == moveQueue.Length)
+    //            {
+    //                StartCoroutine("cameraplayerstop");
+    //                if (forjail == 30 && forjailmodel == true)
+    //                {
 
-                    }
-                    print(NumberOfTile);
-                    StartCoroutine("whenplayerstop");
-                    moveQueueIndex++;
-                }
+    //                    forjailmodel = false;
+    //                    Instantiate(DiceManager.Diceinstance.jailcage, DiceManager.Diceinstance.jailcage.transform.position, DiceManager.Diceinstance.jailcage.transform.rotation);
+    //                }
+    //                print(moveQueueIndex);
+    //                NumberOfTile += moveQueueIndex;
 
 
+    //                if (NumberOfTile > 40)
+    //                {
+    //                    NumberOfTile = NumberOfTile - 40;
+    //                    forjail = forjail - 40;
+    //                    if (jailvisited == false)
+    //                    {
+    //                        if (DiceManager.Diceinstance.playerturn == 1)
+    //                        {
+    //                            PanelManager.instance.player1M += 200;
+    //                            PanelManager.instance.player1money.text = PanelManager.instance.player1M.ToString();
+    //                        }
+    //                        if (DiceManager.Diceinstance.playerturn == 2)
+    //                        {
+    //                            PanelManager.instance.player2M += 200;
+    //                            PanelManager.instance.player2money.text = PanelManager.instance.player2M.ToString();
+    //                        }
+    //                        if (DiceManager.Diceinstance.playerturn == 3)
+    //                        {
+    //                            PanelManager.instance.player3M += 200;
+    //                            PanelManager.instance.player3money.text = PanelManager.instance.player3M.ToString();
+    //                        }
+    //                        if (DiceManager.Diceinstance.playerturn == 4)
+    //                        {
+    //                            PanelManager.instance.player4M += 200;
+    //                            PanelManager.instance.player4money.text = PanelManager.instance.player4M.ToString();
+    //                        }
+    //                    }
+
+    //                }
+    //                print(NumberOfTile);
+    //                StartCoroutine("whenplayerstop");
+    //                moveQueueIndex++;
+    //            }
 
 
 
-            }
 
-        }
-    }
+
+    //        }
+
+    //    }
+    //}
 
    
     void SetNewTargetPosition(Vector3 pos)
@@ -312,85 +320,85 @@ public class PlayerToken : Photon.MonoBehaviour
     }
 
 
-    public void Onlineplayermovement()
-    {
-        if (menuscripts.menuinstance.gameisonline == true)
-        {
-            if (photonView.isMine)
-            {
+    //public void Onlineplayermovement()
+    //{
+    //    if (menuscripts.menuinstance.gameisonline == true)
+    //    {
+    //        if (photonView.isMine)
+    //        {
                
-                int spacesToMove = DiceManager.Diceinstance.totalValue;
-                //if (menuscripts.menuinstance.gameisonline == false)
-                //{
-                //    valueText.text = "Value: " + spacesToMove.ToString();
-                //}
+    //            int spacesToMove = DiceManager.Diceinstance.totalValue;
+    //            //if (menuscripts.menuinstance.gameisonline == false)
+    //            //{
+    //            //    valueText.text = "Value: " + spacesToMove.ToString();
+    //            //}
 
-                companyrent = spacesToMove * 5;
-                if (forjail > 40)
-                {
-                    forjail -= 40;
-                }
+    //            companyrent = spacesToMove * 5;
+    //            if (forjail > 40)
+    //            {
+    //                forjail -= 40;
+    //            }
 
-                if (spacesToMove == 0)
-                {
-                    return;
-                }
+    //            if (spacesToMove == 0)
+    //            {
+    //                return;
+    //            }
 
-                jailvisited = false;
+    //            jailvisited = false;
 
-                forjail = forjail + spacesToMove;
+    //            forjail = forjail + spacesToMove;
 
-                if (DiceManager.Diceinstance.diceList[0].value == DiceManager.Diceinstance.diceList[1].value)
-                {
-                    if (isplayeratjail == true)
-                    {
-                        isplayeratjail = false;
-                    }
-                }
+    //            if (DiceManager.Diceinstance.diceList[0].value == DiceManager.Diceinstance.diceList[1].value)
+    //            {
+    //                if (isplayeratjail == true)
+    //                {
+    //                    isplayeratjail = false;
+    //                }
+    //            }
 
-                if (DiceManager.Diceinstance.forplayertokenandjail == true)
-                {
-                    isplayeratjail = false;
-                    DiceManager.Diceinstance.forplayertokenandjail = false;
-                    print("player is out of jail");
-                }
+    //            if (DiceManager.Diceinstance.forplayertokenandjail == true)
+    //            {
+    //                isplayeratjail = false;
+    //                DiceManager.Diceinstance.forplayertokenandjail = false;
+    //                print("player is out of jail");
+    //            }
 
-                if (forjail != 30 && isplayeratjail == false)
-                {
-                    moveQueue = new Tile[spacesToMove];
+    //            if (forjail != 30 && isplayeratjail == false)
+    //            {
+    //                moveQueue = new Tile[spacesToMove];
 
-                    for (int i = 0; i < spacesToMove; i++)
-                    {
+    //                for (int i = 0; i < spacesToMove; i++)
+    //                {
 
-                        finalTile = finalTile.nextTile;
+    //                    finalTile = finalTile.nextTile;
                        
-                        moveQueue[i] = finalTile;
+    //                    moveQueue[i] = finalTile;
 
-                    }
-                }
+    //                }
+    //            }
 
-                if (forjail == 30 && isplayeratjail == false)
-                {
+    //            if (forjail == 30 && isplayeratjail == false)
+    //            {
 
-                    moveQueue = new Tile[spacesToMove + 20];
+    //                moveQueue = new Tile[spacesToMove + 20];
 
-                    for (int j = 0; j < spacesToMove + 20; j++)
-                    {
-                        finalTile = finalTile.nextTile;
-                        moveQueue[j] = finalTile;
-                    }
+    //                for (int j = 0; j < spacesToMove + 20; j++)
+    //                {
+    //                    finalTile = finalTile.nextTile;
+    //                    moveQueue[j] = finalTile;
+    //                }
 
-                    forjailmodel = true;
+    //                forjailmodel = true;
 
-                    StartCoroutine("forthejailfuction");
+    //                StartCoroutine("forthejailfuction");
 
-                }
+    //            }
 
 
-                moveQueueIndex = 0;
-            }
-        }
-    }
+    //            moveQueueIndex = 0;
+    //        }
+    //    }
+    //}
 
 
 
@@ -402,7 +410,8 @@ public class PlayerToken : Photon.MonoBehaviour
     /// </summary>
     public void MovePlayerToken()
     {
-        if(menuscripts.menuinstance.gameisonline == false)
+        
+        if (menuscripts.menuinstance.gameisonline == false)
         {
             int spacesToMove = DiceManager.Diceinstance.totalValue;
            // valueText.text = "Value: " + spacesToMove.ToString();
@@ -515,6 +524,8 @@ public class PlayerToken : Photon.MonoBehaviour
 
         RentFunctionality.Rentinstance.RentFunction(NumberOfTile);
         PanelManager.instance.ShowpanelImage(NumberOfTile);
+        playeranim.SetBool("Idle", true);
+        playeranim.SetBool("Run", false);
         //print("perfect");
 
     }

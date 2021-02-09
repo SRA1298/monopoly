@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &14817433385789525
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100010, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_Name
+      value: Tower_2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -27.952572
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.0289646e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 46.340446
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300002, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: a82e8d75ec6fc70438b877fa606bdec9, type: 2}
+    - target: {fileID: 2300002, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52ff8df304b90984aa8af962d7b3954a, type: 2}
+    - target: {fileID: 2300002, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 987ca926f1160944ca368c5a4abf5d75, type: 2}
+    - target: {fileID: 2300004, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52ff8df304b90984aa8af962d7b3954a, type: 2}
+    - target: {fileID: 2300006, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 605cf605cff15b74abdc8179ccdfb22f, type: 2}
+    - target: {fileID: 2300006, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 987ca926f1160944ca368c5a4abf5d75, type: 2}
+    - target: {fileID: 2300006, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 987ca926f1160944ca368c5a4abf5d75, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cb0d8cab6b1931948a0fcd03753365cb, type: 3}

@@ -19,13 +19,9 @@ public class DiceManager : MonoBehaviour
     public GameObject playername1, playername2, playername3, playername4;
     
     public GameObject blue;
-   
     public GameObject green;
-
     public GameObject red;
-   
     public GameObject yellow;
-
     [HideInInspector]
     public GameObject PlayerMoney1, PlayerMoney2, PlayerMoney3, PlayerMoney4;
 
@@ -60,12 +56,17 @@ public class DiceManager : MonoBehaviour
     public GameObject player2;
     public GameObject player3;
     public GameObject player4;
-  
+
+    public GameObject bluefire;
+    public GameObject greenfire;
+    public GameObject redfire;
+    public GameObject yellowfire;
 
     void Awake()
     {
         makeinstance();
         Playernnotinjailpanel.transform.gameObject.SetActive(false);
+        
         if(menuscripts.menuinstance.gameisonline == false)
         {
             playername1.GetComponent<Text>().text = PlayerSelection.instance.player1name;
@@ -202,6 +203,10 @@ public class DiceManager : MonoBehaviour
     // this below function is offline roll all die function
     public void RollAllDie()
     {
+        bluefire.transform.gameObject.SetActive(false);
+        greenfire.transform.gameObject.SetActive(false);
+        redfire.transform.gameObject.SetActive(false);
+        yellowfire.transform.gameObject.SetActive(false);
         followscripts.camerainstance.Stoptheanimator();
 
         //TimerCountDown.countdowninstance.timerfunction();
@@ -231,18 +236,22 @@ public class DiceManager : MonoBehaviour
         if (playerturn == 1)
         {
             player1.transform.localScale = new Vector3(1.3f, 1.3f, 0);
+            bluefire.transform.gameObject.SetActive(true);
         }
         if (playerturn == 2)
         {
             player2.transform.localScale = new Vector3(1.3f, 1.3f, 0);
+            greenfire.transform.gameObject.SetActive(true);
         }
         if (playerturn == 3)
         {
             player3.transform.localScale = new Vector3(1.3f, 1.3f, 0);
+            redfire.transform.gameObject.SetActive(true);
         }
         if (playerturn == 4)
         {
             player4.transform.localScale = new Vector3(1.3f, 1.3f, 0);
+            yellowfire.transform.gameObject.SetActive(true);
         }
 
     }
@@ -387,18 +396,22 @@ public class DiceManager : MonoBehaviour
         if (playerturn == 1)
         {
             player1.transform.localScale = new Vector3(1, 1, 0);
+            
         }
         if (playerturn == 2)
         {
             player2.transform.localScale = new Vector3(1, 1, 0);
+           
         }
         if (playerturn == 3)
         {
             player3.transform.localScale = new Vector3(1, 1, 0);
+           
         }
         if (playerturn == 4)
         {
             player4.transform.localScale = new Vector3(1, 1, 0);
+           
         }
 
 
