@@ -61,9 +61,10 @@ public class DiceManager : MonoBehaviour
     public GameObject greenfire;
     public GameObject redfire;
     public GameObject yellowfire;
-
+    public GameObject valuepanel;
     void Awake()
     {
+        valuepanel.transform.gameObject.SetActive(false);
         makeinstance();
         Playernnotinjailpanel.transform.gameObject.SetActive(false);
         
@@ -654,7 +655,23 @@ public class DiceManager : MonoBehaviour
         jailcage.SetActive(false);
         if(menuscripts.menuinstance.gameisonline == false)
         {
-            PlayerToken.playerinstance.dependentjail();
+            //PlayerToken.playerinstance.dependentjail();
+            if (playerturn == 1)
+            {
+                PlayerToken.playerinstance.dependentjail();
+            }
+            if (playerturn == 2)
+            {
+                PlayerToken.playerinstance.dependentjail();
+            }
+            if (playerturn == 3)
+            {
+                PlayerToken.playerinstance.dependentjail();
+            }
+            if (playerturn == 4)
+            {
+                PlayerToken.playerinstance.dependentjail();
+            }
         }
         if(menuscripts.menuinstance.gameisonline == true)
         {
@@ -682,68 +699,74 @@ public class DiceManager : MonoBehaviour
 
     public void specialjailbutton()
     {
-        if(menuscripts.menuinstance.gameisonline == false)
-        {
-            if (PlayerToken.playerinstance.isplayeratjail == true)
-            {
-                jailpanel.transform.gameObject.SetActive(true);
-                RollButton.transform.gameObject.SetActive(false);
-                EndTurnButton.transform.gameObject.SetActive(true);
-            }
-            else
-            {
-                Playernnotinjailpanel.transform.gameObject.SetActive(true);
-                StartCoroutine("jailexit");
-            }
-        }
 
-        if(menuscripts.menuinstance.gameisonline == true)
-        {
-            if(playerturn == 1 && player1token.player1instance.isplayeratjail == true)
-            {
-                jailpanel.transform.gameObject.SetActive(true);
-                RollButton.transform.gameObject.SetActive(false);
-                EndTurnButton.transform.gameObject.SetActive(true);
-            }
-            else
-            {
-                Playernnotinjailpanel.transform.gameObject.SetActive(true);
-                StartCoroutine("jailexit");
-            }
-            if (playerturn == 2 && player2token.player2instance.isplayeratjail == true)
-            {
-                jailpanel.transform.gameObject.SetActive(true);
-                RollButton.transform.gameObject.SetActive(false);
-                EndTurnButton.transform.gameObject.SetActive(true);
-            }
-            else
-            {
-                Playernnotinjailpanel.transform.gameObject.SetActive(true);
-                StartCoroutine("jailexit");
-            }
-            if (playerturn == 3 && Player3Token.player3instance.isplayeratjail == true)
-            {
-                jailpanel.transform.gameObject.SetActive(true);
-                RollButton.transform.gameObject.SetActive(false);
-                EndTurnButton.transform.gameObject.SetActive(true);
-            }
-            else
-            {
-                Playernnotinjailpanel.transform.gameObject.SetActive(true);
-                StartCoroutine("jailexit");
-            }
-            if (playerturn == 4 && player4Token.player4instance.isplayeratjail == true)
-            {
-                jailpanel.transform.gameObject.SetActive(true);
-                RollButton.transform.gameObject.SetActive(false);
-                EndTurnButton.transform.gameObject.SetActive(true);
-            }
-            else
-            {
-                Playernnotinjailpanel.transform.gameObject.SetActive(true);
-                StartCoroutine("jailexit");
-            }
-        }
+        jailpanel.transform.gameObject.SetActive(true);
+        RollButton.transform.gameObject.SetActive(false);
+        EndTurnButton.transform.gameObject.SetActive(true);
+
+
+        //if (menuscripts.menuinstance.gameisonline == false)
+        //{
+        //    if (PlayerToken.playerinstance.isplayeratjail == true)
+        //    {
+        //        jailpanel.transform.gameObject.SetActive(true);
+        //        RollButton.transform.gameObject.SetActive(false);
+        //        EndTurnButton.transform.gameObject.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        Playernnotinjailpanel.transform.gameObject.SetActive(true);
+        //        StartCoroutine("jailexit");
+        //    }
+        //}
+
+        //if(menuscripts.menuinstance.gameisonline == true)
+        //{
+        //    if(playerturn == 1 && player1token.player1instance.isplayeratjail == true)
+        //    {
+        //        jailpanel.transform.gameObject.SetActive(true);
+        //        RollButton.transform.gameObject.SetActive(false);
+        //        EndTurnButton.transform.gameObject.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        Playernnotinjailpanel.transform.gameObject.SetActive(true);
+        //        StartCoroutine("jailexit");
+        //    }
+        //    if (playerturn == 2 && player2token.player2instance.isplayeratjail == true)
+        //    {
+        //        jailpanel.transform.gameObject.SetActive(true);
+        //        RollButton.transform.gameObject.SetActive(false);
+        //        EndTurnButton.transform.gameObject.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        Playernnotinjailpanel.transform.gameObject.SetActive(true);
+        //        StartCoroutine("jailexit");
+        //    }
+        //    if (playerturn == 3 && Player3Token.player3instance.isplayeratjail == true)
+        //    {
+        //        jailpanel.transform.gameObject.SetActive(true);
+        //        RollButton.transform.gameObject.SetActive(false);
+        //        EndTurnButton.transform.gameObject.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        Playernnotinjailpanel.transform.gameObject.SetActive(true);
+        //        StartCoroutine("jailexit");
+        //    }
+        //    if (playerturn == 4 && player4Token.player4instance.isplayeratjail == true)
+        //    {
+        //        jailpanel.transform.gameObject.SetActive(true);
+        //        RollButton.transform.gameObject.SetActive(false);
+        //        EndTurnButton.transform.gameObject.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        Playernnotinjailpanel.transform.gameObject.SetActive(true);
+        //        StartCoroutine("jailexit");
+        //    }
+        //}
         
         
     }

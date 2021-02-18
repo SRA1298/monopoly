@@ -37,7 +37,9 @@ public class menuscripts : MonoBehaviour
     {
         //GetComponent<AudioSource>().Play();
         mainmenupanel.transform.gameObject.SetActive(false);
-        on_offlinepanel.transform.gameObject.SetActive(true);
+        //on_offlinepanel.transform.gameObject.SetActive(true);
+        gameisonline = false;
+        rulespanel.transform.gameObject.SetActive(true);
 
     }
 
@@ -96,7 +98,6 @@ public class menuscripts : MonoBehaviour
     }
     public void classicbutton()
     {
-       
         SceneManager.LoadScene("Classic");
     }
 

@@ -29,8 +29,6 @@ public class RentFunctionality : MonoBehaviour
     public int[] hotelrent = new int[41];
 
    
-
-
     void Awake()
     {
         RentValue[1] = 5;

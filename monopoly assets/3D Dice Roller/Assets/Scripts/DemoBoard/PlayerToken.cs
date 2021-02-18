@@ -9,7 +9,7 @@ public class PlayerToken : Photon.MonoBehaviour
     [Tooltip("The tile the PlayerToken will start on.")]
     [HideInInspector] public Tile startingTile;
     [HideInInspector] public DiceManager diceManager;
-    [HideInInspector] public Text valueText;
+    public Text valueText;
 
     public PhotonView photonview;
 
@@ -53,7 +53,7 @@ public class PlayerToken : Photon.MonoBehaviour
        
         diceManager = GameObject.Find("DiceManager").gameObject.GetComponent<DiceManager>();
 
-        valueText = GameObject.Find("ValueText").gameObject.GetComponent<Text>();
+        //valueText = GameObject.Find("value Text").gameObject.GetComponent<Text>();
 
         playeranim = GetComponent<Animator>();
         isplayeratjail = false;
@@ -414,7 +414,10 @@ public class PlayerToken : Photon.MonoBehaviour
         if (menuscripts.menuinstance.gameisonline == false)
         {
             int spacesToMove = DiceManager.Diceinstance.totalValue;
-           // valueText.text = "Value: " + spacesToMove.ToString();
+            // valueText.text = "Value: " + spacesToMove.ToString();
+            DiceManager.Diceinstance.valuepanel.SetActive(true);
+            valueText.text = spacesToMove.ToString();
+            StartCoroutine("sechalttoclosevaluepanel");
 
             companyrent = spacesToMove * 5;
             if (forjail > 40)
@@ -529,6 +532,15 @@ public class PlayerToken : Photon.MonoBehaviour
         //print("perfect");
 
     }
+
+    // this is used to close the value panel
+    IEnumerator sechalttoclosevaluepanel()
+    {
+        yield return new WaitForSeconds(0.5f);
+        DiceManager.Diceinstance.valuepanel.SetActive(false);
+
+    }
+
 
     // this is used to wait the camera until the player complete the movement 
     IEnumerator cameraplayerstop()

@@ -30,14 +30,14 @@ public class mortgage : MonoBehaviour
             mortgageinstance = this;
         }
     }
-    private void Update()
+    public void Update()
     {
         if ( Input.GetMouseButtonDown(0) )
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, 200.0f))
+            if (Physics.Raycast(ray, out hit, 300.0f))
             {
                 if (mortgagebuttonclicked == true)
                 {

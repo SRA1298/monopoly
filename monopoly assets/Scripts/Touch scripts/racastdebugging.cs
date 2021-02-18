@@ -122,14 +122,14 @@ public class racastdebugging : MonoBehaviour
         }
     }
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, 200.0f))
+            if (Physics.Raycast(ray, out hit, 300.0f))
             {
                 if (clickcityrepresentation == true) //this help to stop the extra click activity
                 {
@@ -145,7 +145,7 @@ public class racastdebugging : MonoBehaviour
 
     }
 
-    void Printname(GameObject go)
+    public void Printname(GameObject go)
     {
         //print(go.name);
         cityrepresentpanel.transform.gameObject.SetActive(true);
